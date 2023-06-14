@@ -8,9 +8,10 @@ haga checkout a la rama master
 dentro de carpeta backend-demo abra una ventana de gitbash o su equivalente y ejecute los siguientes comandos:
 En consola ejecutar:
 
-./gradlew build
+mvn clean package
 
 posteriormente, ejecutar:
 
 docker-compose up --build
+
 En el archivo BaseDatos.sql se encuentra el script de creación de la base de datos.
