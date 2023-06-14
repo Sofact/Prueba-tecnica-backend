@@ -13,3 +13,4 @@ En consola ejecutar:
 posteriormente, ejecutar:
 
 docker-compose up --build
+En el archivo BaseDatos.sql se encuentra el script de creación de la base de datos.
