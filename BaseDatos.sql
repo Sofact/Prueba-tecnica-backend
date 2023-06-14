@@ -1,6 +1,16 @@
 
+CREATE ROLE test WITH
+  LOGIN
+  SUPERUSER
+  INHERIT
+  CREATEDB
+  CREATEROLE
+  REPLICATION
+  ENCRYPTED PASSWORD 'md5a55d58525452ad0aec0c140d58417912'; (neoris$2023)
 
-CREATE DATABASE pichincha1
+GRANT postgres TO test;
+
+CREATE DATABASE pichincha
 WITH
     OWNER = test
     ENCODING = 'UTF8'
@@ -9,12 +19,73 @@ WITH
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 
+
 CREATE SCHEMA pc
     AUTHORIZATION test;
 
 -- Table: pc.cliente
 
 -- DROP TABLE pc.cliente;
+
+CREATE SEQUENCE pc.persona_per_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE pc.persona_per_id_seq
+    OWNER TO test;
+
+-- SEQUENCE: pc.seq_cuenta
+
+-- DROP SEQUENCE pc.seq_cuenta;
+
+CREATE SEQUENCE pc.seq_cuenta
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE pc.seq_cuenta
+    OWNER TO test;
+
+CREATE SEQUENCE pc.seq_movimiento
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE pc.seq_movimiento
+    OWNER TO test;
+
+
+-- Table: pc.persona
+
+-- DROP TABLE pc.persona;
+
+CREATE TABLE pc.persona
+(
+    per_id bigint NOT NULL DEFAULT nextval('pc.persona_per_id_seq'::regclass),
+    per_direccion character varying(255) COLLATE pg_catalog."default",
+    per_edad integer,
+    per_genero character varying(255) COLLATE pg_catalog."default",
+    per_identificacion character varying(255) COLLATE pg_catalog."default",
+    per_nombre character varying(255) COLLATE pg_catalog."default",
+    per_telefono character varying(255) COLLATE pg_catalog."default",
+    cli_id bigint,
+    CONSTRAINT persona_pkey PRIMARY KEY (per_id)
+)
+WITH (
+    OIDS = FALSE
+)
+    TABLESPACE pg_default;
+
+ALTER TABLE pc.persona
+    OWNER to test;
+
 
 CREATE TABLE pc.cliente
 (
@@ -78,28 +149,4 @@ WITH (
     TABLESPACE pg_default;
 
 ALTER TABLE pc.movimiento
-    OWNER to test;
-
--- Table: pc.persona
-
--- DROP TABLE pc.persona;
-
-CREATE TABLE pc.persona
-(
-    per_id bigint NOT NULL DEFAULT nextval('pc.persona_per_id_seq'::regclass),
-    per_direccion character varying(255) COLLATE pg_catalog."default",
-    per_edad integer,
-    per_genero character varying(255) COLLATE pg_catalog."default",
-    per_identificacion character varying(255) COLLATE pg_catalog."default",
-    per_nombre character varying(255) COLLATE pg_catalog."default",
-    per_telefono character varying(255) COLLATE pg_catalog."default",
-    cli_id bigint,
-    CONSTRAINT persona_pkey PRIMARY KEY (per_id)
-)
-WITH (
-    OIDS = FALSE
-)
-    TABLESPACE pg_default;
-
-ALTER TABLE pc.persona
     OWNER to test;
