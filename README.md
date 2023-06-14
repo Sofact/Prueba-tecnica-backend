@@ -15,3 +15,4 @@ posteriormente, ejecutar:
 docker-compose up --build
 
 En el archivo BaseDatos.sql se encuentra el script de creación de la base de datos.
+En el archivo pichincha.postman_collection.json se encuentra el JSON con las pruebas de los diferentes endpoints.
