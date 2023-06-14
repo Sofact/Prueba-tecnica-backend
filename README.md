@@ -10,9 +10,19 @@ En consola ejecutar:
 
 mvn clean package
 
-posteriormente, ejecutar:
+Posteriormente ejecutar 
 
-docker-compose up --build
+ docker login
+ Username:
+ Password
+ 
+docker build -t app-springboot-postgresql .
+docker tag app-springboot-postgresql <Dockerhub user>/app-springboot-postgresql:latest
+docker push <Dockerhub user>/app-springboot-postgresql
+docker-compose up --force-recreate
+
+
+
 
 En el archivo BaseDatos.txt se encuentra el script de creación de la base de datos.
 En el archivo pichincha.postman_collection.json se encuentra el JSON con las pruebas de los diferentes endpoints.
