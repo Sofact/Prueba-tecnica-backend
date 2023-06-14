@@ -1,18 +1,26 @@
 version: '3.1'
 services:
   app:
-    container_name: app-pichincha
-    image: app-pichincha
-    build: ./
+    container_name: app-springboot-postgresql
+    image: app-springboot-postgresql
     ports:
-      - "8081:8081"
+      - 8081:8081
+    links:
+      - dbpostgresql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://dbpostgresql:5432/pichincha
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=create
+      - LOGGING_LEVEL_ORG_HIBERNATE_SQL=debug
     depends_on:
       - dbpostgresql
+
   dbpostgresql:
     image: postgres
     ports:
-      - "5432:5432"
+      - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=neoris$2023
-      - POSTGRES_USER=test
       - POSTGRES_DB=pichincha
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres

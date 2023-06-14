@@ -5,13 +5,12 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="movimiento", schema="pc")
+@Table(name="movimiento")
 public class Movimiento {
 
-    private static final String SQ_MOVIMIENTO = "seq_movimiento";
+    //private static final String SQ_MOVIMIENTO = "seq_movimiento";
     @Id
-    @GeneratedValue(generator=Movimiento.SQ_MOVIMIENTO, strategy= GenerationType.AUTO)
-    @SequenceGenerator(schema="pc", name=Movimiento.SQ_MOVIMIENTO ,   sequenceName=Movimiento.SQ_MOVIMIENTO, initialValue=1, allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="mov_id")
     private Long movId;
 

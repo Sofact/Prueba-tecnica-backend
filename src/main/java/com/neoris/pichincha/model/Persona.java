@@ -3,7 +3,7 @@ package com.neoris.pichincha.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "persona", schema= "pc")
+@Table(name = "persona")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Persona {
 

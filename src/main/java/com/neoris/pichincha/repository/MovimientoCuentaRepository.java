@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface MovimientoCuentaRepository extends JpaRepository<Movimiento, Long> {
 
-    @Query(value = "select m.mov_id, m.cta_id, m.mov_saldo, m.mov_tipo, m.mov_valor, m.mov_fecha, c.cta_numero from pc.movimiento m inner join  pc.cuenta c on m.cta_id = c.cta_id", nativeQuery = true)
+    @Query(value = "select m.mov_id, m.cta_id, m.mov_saldo, m.mov_tipo, m.mov_valor, m.mov_fecha, c.cta_numero from movimiento m inner join  cuenta c on m.cta_id = c.cta_id", nativeQuery = true)
     List<Object[]> obtenerResultadoJoin();
 }

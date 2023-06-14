@@ -3,13 +3,12 @@ package com.neoris.pichincha.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="cuenta", schema="pc")
+@Table(name="cuenta")
 public class Cuenta {
 
-    private static final String SQ_CUENTA = "seq_cuenta";
+
     @Id
-    @GeneratedValue(generator=Cuenta.SQ_CUENTA, strategy= GenerationType.AUTO)
-    @SequenceGenerator(schema="pc", name=Cuenta.SQ_CUENTA ,   sequenceName=Cuenta.SQ_CUENTA, initialValue=1, allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="cta_id")
     private Long ctaId;
 

@@ -5,10 +5,9 @@ import com.neoris.pichincha.model.Persona;
 
 @Entity
 
-@Table(name="cliente", schema="pc")
+@Table(name="cliente")
 public class Cliente  extends Persona{
 
-    private static final String SQ_CLIENTE = "seq_cliente";
 
 
 
