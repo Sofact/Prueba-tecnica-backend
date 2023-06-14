@@ -20,53 +20,52 @@ WITH
     CONNECTION LIMIT = -1;
 
 
-CREATE SCHEMA pc
-    AUTHORIZATION test;
 
--- Table: pc.cliente
 
--- DROP TABLE pc.cliente;
+-- Table: cliente
 
-CREATE SEQUENCE pc.persona_per_id_seq
+-- DROP TABLE cliente;
+
+CREATE SEQUENCE persona_per_id_seq
     INCREMENT 1
     START 1
     MINVALUE 1
     MAXVALUE 9223372036854775807
     CACHE 1;
 
-ALTER SEQUENCE pc.persona_per_id_seq
+ALTER SEQUENCE persona_per_id_seq
     OWNER TO test;
 
--- SEQUENCE: pc.seq_cuenta
+-- SEQUENCE: seq_cuenta
 
--- DROP SEQUENCE pc.seq_cuenta;
+-- DROP SEQUENCE seq_cuenta;
 
-CREATE SEQUENCE pc.seq_cuenta
+CREATE SEQUENCE seq_cuenta
     INCREMENT 1
     START 1
     MINVALUE 1
     MAXVALUE 9223372036854775807
     CACHE 1;
 
-ALTER SEQUENCE pc.seq_cuenta
+ALTER SEQUENCE seq_cuenta
     OWNER TO test;
 
-CREATE SEQUENCE pc.seq_movimiento
+CREATE SEQUENCE seq_movimiento
     INCREMENT 1
     START 1
     MINVALUE 1
     MAXVALUE 9223372036854775807
     CACHE 1;
 
-ALTER SEQUENCE pc.seq_movimiento
+ALTER SEQUENCE seq_movimiento
     OWNER TO test;
 
 
--- Table: pc.persona
+-- Table: persona
 
--- DROP TABLE pc.persona;
+-- DROP TABLE persona;
 
-CREATE TABLE pc.persona
+CREATE TABLE persona
 (
     per_id bigint NOT NULL DEFAULT nextval('pc.persona_per_id_seq'::regclass),
     per_direccion character varying(255) COLLATE pg_catalog."default",
@@ -83,18 +82,18 @@ WITH (
 )
     TABLESPACE pg_default;
 
-ALTER TABLE pc.persona
+ALTER TABLE persona
     OWNER to test;
 
 
-CREATE TABLE pc.cliente
+CREATE TABLE cliente
 (
     cli_contrasena character varying(255) COLLATE pg_catalog."default",
     cli_estado character varying(255) COLLATE pg_catalog."default",
     per_id bigint NOT NULL,
     CONSTRAINT cliente_pkey PRIMARY KEY (per_id),
     CONSTRAINT fkndty26om7h6vrb00nyfg86qmc FOREIGN KEY (per_id)
-        REFERENCES pc.persona (per_id) MATCH SIMPLE
+        REFERENCES persona (per_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -106,11 +105,11 @@ WITH (
 ALTER TABLE pc.cliente
     OWNER to test;
 
--- Table: pc.cuenta
+-- Table: cuenta
 
--- DROP TABLE pc.cuenta;
+-- DROP TABLE cuenta;
 
-CREATE TABLE pc.cuenta
+CREATE TABLE cuenta
 (
     cta_id bigint NOT NULL,
     cta_estado character varying(255) COLLATE pg_catalog."default",
@@ -125,15 +124,15 @@ WITH (
 )
     TABLESPACE pg_default;
 
-ALTER TABLE pc.cuenta
+ALTER TABLE cuenta
     OWNER to test;
 
 
--- Table: pc.movimiento
+-- Table: movimiento
 
--- DROP TABLE pc.movimiento;
+-- DROP TABLE movimiento;
 
-CREATE TABLE pc.movimiento
+CREATE TABLE movimiento
 (
     mov_id bigint NOT NULL,
     cta_id bigint,
@@ -148,5 +147,5 @@ WITH (
 )
     TABLESPACE pg_default;
 
-ALTER TABLE pc.movimiento
+ALTER TABLE movimiento
     OWNER to test;
