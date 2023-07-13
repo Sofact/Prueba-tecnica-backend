@@ -12,16 +12,22 @@ mvn clean package
 
 Posteriormente ejecutar 
 
- docker login
- Username:
- Password
+ docker login 
+Ingresar 
+
+ Username: miUsuarioDockerHub
+
+ Password: ******
  
+Ejecutar los siguientes comandos:
+
 docker build -t app-springboot-postgresql .
-docker tag app-springboot-postgresql <Dockerhub user>/app-springboot-postgresql:latest
-docker push <Dockerhub user>/app-springboot-postgresql
+
+docker tag app-springboot-postgresql miUsuarioDockerHub/app-springboot-postgresql:latest
+
+docker push miUsuarioDockerHub/app-springboot-postgresql
+
 docker-compose up --force-recreate
-
-
 
 
 En el archivo BaseDatos.txt se encuentra el script de creación de la base de datos.
