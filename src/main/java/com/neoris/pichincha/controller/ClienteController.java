@@ -31,7 +31,7 @@ public class ClienteController {
     @GetMapping("/id/{perId}")
     public Cliente getById(@PathVariable Long perId){
 
-        System.out.println("InrgesoPErID"+ perId);
+
 
         return clienteService.findById(perId).orElse(null);
     }
@@ -39,7 +39,6 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente create (@RequestBody Cliente clienteParam){
 
-        System.out.println("Clienteparam:::" + clienteParam.getCliContrasena());
 
         Cliente cliente = new Cliente();
         cliente.setPerNombre(clienteParam.getPerNombre());
@@ -80,7 +79,7 @@ public class ClienteController {
     @Transactional
     public Long delete (@PathVariable long perId){
 
-        System.out.println("Borrando el id::" + perId);
+
         clienteService.deleteByPerId(perId);
         return perId;
     }

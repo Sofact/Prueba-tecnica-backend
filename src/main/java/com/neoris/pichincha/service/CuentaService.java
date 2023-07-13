@@ -39,7 +39,7 @@ public class CuentaService {
 
             return cuentaRepository.save(cuenta.get());
         } else {
-            throw new RuntimeException("Cliente no encontrado");
+            throw new RuntimeException("Cuenta no encontrada");
         }
     }
 

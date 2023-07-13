@@ -87,10 +87,10 @@ public class MovimientoController {
         } catch (ParseException e) {
            System.out.println("Error casteando la fecha");
         }
-        System.out.println("Inicio Generacion pdfaaa");
+
         try {
 
-            System.out.println("Inicio Generacion pdf");
+
             List<ReporteDTO> reporte = reporteService.obtenerResultadoJoin(dateInicio, dateFin, opcionSeleccionada);
             byte[] pdfBytes = PDFExporter.exportToPDF(reporte);
 
