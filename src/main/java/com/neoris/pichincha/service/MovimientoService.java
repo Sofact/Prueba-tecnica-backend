@@ -3,6 +3,7 @@ package com.neoris.pichincha.service;
 
 import com.neoris.pichincha.model.Movimiento;
 import com.neoris.pichincha.repository.MovimientoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,11 +29,13 @@ public class MovimientoService {
         return movimientoRepository.findById(movId);
     }
 
+    @Transactional
     public Movimiento saveMovimiento(Movimiento movimiento){
 
         return  movimientoRepository.save(movimiento);
     }
 
+    @Transactional
     public Movimiento updateMovimiento(Optional<Movimiento> movimiento){
 
         if (movimiento.isPresent()) {
@@ -42,7 +45,7 @@ public class MovimientoService {
             throw new RuntimeException("Cliente no encontrado");
         }
     }
-
+    @Transactional
     public void deleteByMovId(Long movId){
         movimientoRepository.deleteByMovId(movId);
     }

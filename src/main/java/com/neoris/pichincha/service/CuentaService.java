@@ -4,6 +4,7 @@ package com.neoris.pichincha.service;
 import com.neoris.pichincha.model.Cuenta;
 import com.neoris.pichincha.repository.ClienteRepository;
 import com.neoris.pichincha.repository.CuentaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,11 +29,13 @@ public class CuentaService {
         return cuentaRepository.findById(ctaId);
     }
 
+    @Transactional
     public Cuenta saveCuenta(Cuenta cuenta){
 
         return  cuentaRepository.save(cuenta);
     }
 
+    @Transactional
     public Cuenta updateCuenta(Optional<Cuenta> cuenta){
 
         if (cuenta.isPresent()) {
@@ -43,6 +46,7 @@ public class CuentaService {
         }
     }
 
+    @Transactional
     public void deleteByCtaId(Long ctaId){
         cuentaRepository.deleteByCtaId(ctaId);
     }

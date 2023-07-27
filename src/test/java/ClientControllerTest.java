@@ -36,6 +36,7 @@ public class ClientControllerTest {
     @InjectMocks
     private ClienteController clienteController;
 
+
     private MockMvc mockMvc;
 
     @Before
@@ -46,8 +47,8 @@ public class ClientControllerTest {
     @Test
     public void testGetAll() throws Exception {
         List<Cliente> clientes = Arrays.asList(
-                new Cliente(/* datos de prueba */),
-                new Cliente(/* datos de prueba */)
+                new Cliente(),
+                new Cliente()
         );
 
         Mockito.when(clienteService.getAll()).thenReturn(clientes);
@@ -61,8 +62,8 @@ public class ClientControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-        Cliente clienteParam = new Cliente(/* datos de prueba */);
-        Cliente clienteGuardado = new Cliente(/* datos de prueba */);
+        Cliente clienteParam = new Cliente();
+        Cliente clienteGuardado = new Cliente();
 
         Mockito.when(personaService.savePersona(Mockito.any())).thenReturn(clienteParam);
         Mockito.when(clienteService.saveCliente(Mockito.any())).thenReturn(clienteGuardado);
@@ -77,8 +78,8 @@ public class ClientControllerTest {
     @Test
     public void testUpdate() throws Exception {
         Long id = 1L;
-        Cliente cliente = new Cliente(/* datos de prueba */);
-        Optional<Cliente> clienteActual = Optional.of(new Cliente(/* datos de prueba */));
+        Cliente cliente = new Cliente();
+        Optional<Cliente> clienteActual = Optional.of(new Cliente());
 
         Mockito.when(clienteService.findById(id)).thenReturn(clienteActual);
         Mockito.when(clienteService.updateCliente(Mockito.any())).thenReturn(cliente);
@@ -100,7 +101,7 @@ public class ClientControllerTest {
         Mockito.verify(clienteService, Mockito.times(1)).deleteByPerId(perId);
     }
 
-    // Método de utilidad para convertir un objeto a una cadena JSON
+
     private static String asJsonString(Object obj) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();

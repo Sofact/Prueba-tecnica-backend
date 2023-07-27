@@ -2,6 +2,7 @@ package com.neoris.pichincha.controller;
 
 
 import com.itextpdf.text.DocumentException;
+import com.neoris.pichincha.exception.ResourceNotFoundException;
 import com.neoris.pichincha.model.Movimiento;
 import com.neoris.pichincha.model.MovimientoCuentaPersonaDTO;
 import com.neoris.pichincha.model.ReporteDTO;
@@ -107,7 +108,7 @@ public class MovimientoController {
     @GetMapping("/id/{movId}")
     public Movimiento getById(@PathVariable Long movId){
 
-        return movimientoService.findById(movId).orElse(null);
+        return movimientoService.findById(movId).orElseThrow(() -> new ResourceNotFoundException("Movimiento no encontrado con ID: " + movId));
     }
 
     @PostMapping("/save")
@@ -124,7 +125,7 @@ public class MovimientoController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Movimiento update(@RequestBody Movimiento movimiento, @PathVariable Long id){
 
-        Optional<Movimiento> movimientoActual = movimientoService.findById(id);
+        Optional<Movimiento> movimientoActual = Optional.ofNullable(movimientoService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Movimiento no encontrado para actualizar con ID: " + id)));
 
 
         movimientoActual.orElse(null).setMovfecha(movimiento.getMovfecha());

@@ -39,9 +39,7 @@ public class Cliente  extends Persona{
         this.cliEstado = cliEstado;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
+
 }
 
 

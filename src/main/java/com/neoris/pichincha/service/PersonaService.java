@@ -2,6 +2,7 @@ package com.neoris.pichincha.service;
 
 import com.neoris.pichincha.model.Persona;
 import com.neoris.pichincha.repository.PersonaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class PersonaService {
         this.personaRepository = personaRepository;
     }
 
+    @Transactional
     public Persona savePersona (Persona persona){
         return personaRepository.save(persona);
     }

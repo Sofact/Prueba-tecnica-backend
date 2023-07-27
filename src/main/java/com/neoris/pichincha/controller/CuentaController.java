@@ -1,5 +1,6 @@
 package com.neoris.pichincha.controller;
 
+import com.neoris.pichincha.exception.ResourceNotFoundException;
 import com.neoris.pichincha.model.Cuenta;
 import com.neoris.pichincha.model.CuentaPersonaDTO;
 import com.neoris.pichincha.service.CuentaPersonaService;
@@ -39,6 +40,10 @@ public class CuentaController {
     @ResponseStatus(HttpStatus.CREATED)
     public Cuenta create (@RequestBody Cuenta cuenta) {
 
+        if (cuenta.getPerId() == 0) {
+            throw new ResourceNotFoundException("No fue recibido el id del cliente para el guardado " );
+        }
+
         return cuentaService.saveCuenta(cuenta);
     }
 
@@ -46,7 +51,8 @@ public class CuentaController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Cuenta update(@RequestBody Cuenta cuenta, @PathVariable Long id){
 
-        Optional<Cuenta> cuentaActual = cuentaService.findById(id);
+        Optional<Cuenta> cuentaActual = Optional.ofNullable(cuentaService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cuenta no encontrada con ID: " + id)));
+
 
         cuentaActual.orElse(null).setCtaNumero(cuenta.getCtaNumero());
         cuentaActual.orElse(null).setCtaTipoCuenta(cuenta.getCtaTipoCuenta());

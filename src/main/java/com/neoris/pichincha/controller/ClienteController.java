@@ -1,5 +1,6 @@
 package com.neoris.pichincha.controller;
 
+import com.neoris.pichincha.exception.ResourceNotFoundException;
 import com.neoris.pichincha.model.Cliente;
 import com.neoris.pichincha.model.Persona;
 import com.neoris.pichincha.service.ClienteService;
@@ -31,9 +32,9 @@ public class ClienteController {
     @GetMapping("/id/{perId}")
     public Cliente getById(@PathVariable Long perId){
 
+        Cliente clienteactual = clienteService.findById(perId).orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado con ID: " + perId));
 
-
-        return clienteService.findById(perId).orElse(null);
+        return clienteactual;
     }
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
@@ -59,7 +60,7 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Cliente update(@RequestBody Cliente cliente, @PathVariable Long id){
 
-        Optional<Cliente> clienteActual = clienteService.findById(id);
+        Optional<Cliente> clienteActual = Optional.ofNullable(clienteService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado para actualizar con ID: " + id)));
 
         clienteActual.orElse(null).setPerNombre(cliente.getPerNombre());
         clienteActual.orElse(null).setPerGenero(cliente.getPerGenero());
@@ -79,6 +80,11 @@ public class ClienteController {
     @Transactional
     public Long delete (@PathVariable long perId){
 
+        Cliente clienteactual = clienteService.findById(perId).orElse(null);
+
+        if (clienteactual == null) {
+            throw new ResourceNotFoundException("Cliente no encontrado para eliminar con ID: " + perId);
+        }
 
         clienteService.deleteByPerId(perId);
         return perId;
